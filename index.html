@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>for you ♡</title>
+  <meta name="description" content="a little cute website made with love for your birthday." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,200;0,300;0,400;1,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- floating hearts background -->
+  <div class="hearts-bg" id="heartsBg" aria-hidden="true"></div>
+
+  <!-- music control -->
+  <button class="music-toggle" id="musicToggle" aria-label="putar / hentikan musik">
+    <span class="note">♪</span>
+  </button>
+
+  <div class="app" id="app">
+
+    <!-- ============ 1. INTRO ============ -->
+    <section class="screen" data-screen="intro">
+      <div class="screen-inner">
+        <p class="hi-text">Hi</p>
+        <div class="cat-wrap big" data-cat="normal"></div>
+        <h1 class="title">Holla, dengan Zye disini 👋</h1>
+        <button class="btn solid" data-go="announce">tap disinii &lt;3</button>
+      </div>
+    </section>
+
+    <!-- ============ 2. PASSWORD ============ -->
+    <section class="screen active" data-screen="gate">
+      <div class="screen-inner">
+        <div class="cat-wrap small" data-cat="curious"></div>
+        <h2 class="title sm">Hi love, try to guess the password,<br />I bet u knoww!!</h2>
+
+        <div class="pin-dots" id="pinDots">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="keypad" id="keypad">
+          <button data-key="1">1</button>
+          <button data-key="2">2</button>
+          <button data-key="3">3</button>
+          <button data-key="4">4</button>
+          <button data-key="5">5</button>
+          <button data-key="6">6</button>
+          <button data-key="7">7</button>
+          <button data-key="8">8</button>
+          <button data-key="9">9</button>
+          <span class="spacer"></span>
+          <button data-key="0">0</button>
+          <button data-key="del" class="del">⌫</button>
+        </div>
+
+        <p class="clue">clue : your birthday</p>
+      </div>
+    </section>
+
+    <!-- ============ 3. ANNOUNCE ============ -->
+    <section class="screen" data-screen="announce">
+      <div class="screen-inner">
+        <div class="cat-wrap small sticker-card" data-cat="happy">
+          <span class="deco star a">✦</span>
+          <span class="deco star b">★</span>
+          <span class="deco star c">✦</span>
+        </div>
+        <h2 class="title">This is a very special day<br />because it's my favorite person's Birthday</h2>
+        <button class="btn solid" data-go="ready">open it &lt;3</button>
+      </div>
+    </section>
+
+    <!-- ============ 4. READY ============ -->
+    <section class="screen" data-screen="ready">
+      <div class="screen-inner">
+        <div class="cat-wrap small" data-cat="arms">
+          <span class="deco hb a">💛</span>
+          <span class="deco hb b">💗</span>
+        </div>
+        <h2 class="title">sudah siap belommm?</h2>
+        <div class="btn-row">
+          <button class="btn solid" data-go="pic1">Udahh</button>
+          <button class="btn outline" id="nooBtn" data-go="angry">Nggak</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. ANGRY ============ -->
+    <section class="screen" data-screen="angry">
+      <div class="screen-inner">
+        <div class="cat-wrap small" data-cat="angry">
+          <span class="deco angry">💢</span>
+        </div>
+        <h2 class="title angry-text">
+          WAH PARAH, HADIAH DARI ZYE DITOLAK MENTAH-MENTAH LHOYA!! </h2>
+        <button class="btn solid" data-go="ready">back</button>
+      </div>
+    </section>
+
+    <!-- ============ 6. LAST SCREEN ============ -->
+    <section class="screen" data-screen="pic1">
+      <div class="screen-inner">
+        <div class="photo-frame">
+          <span class="photo" style="background-image:url('foto1.PNG')"></span>
+        </div>
+        <h2 class="title sm">Okayy last one, i made something for your birthday, read it slowly okay</h2>
+        <button class="btn solid" id="enterOcean">klik ini&lt;3</button>
+      </div>
+    </section>
+
+  </div><!-- /.app -->
+
+  <!-- ═══════════════════════════════════════════════
+       OCEAN BIRTHDAY PAGE (hidden until triggered)
+       ═══════════════════════════════════════════════ -->
+  <div id="ocean-page" style="display:none;">
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <canvas id="petal-canvas"></canvas>
+
+    <audio id="audioPlayer" preload="auto"></audio>
+
+    <div class="music-player" id="oceanMusicPlayer">
+      <div class="disc" id="musicDisc">🎵</div>
+      <div class="track-info">
+        <div class="track-title" id="trackTitle">Bahagia</div>
+        <div class="track-artist" id="trackArtist">GAC</div>
+      </div>
+      <button class="play-btn" id="prevBtn" aria-label="Previous track">⏮</button>
+      <button class="play-btn" id="playBtn" aria-label="Toggle music">▶</button>
+      <button class="play-btn" id="nextBtn" aria-label="Next track">⏭</button>
+    </div>
+
+    <div id="ocean-content">
+      <div class="wrapper">
+
+        <section class="hero">
+          <p class="hero-eyebrow reveal">a birthday tide of blue</p>
+          <h1 class="hero-title reveal">Happy Birthday<br>My <em> Favorite Person</em></h1>
+          <p class="hero-sub reveal">Di antara semua hal yang ingin aku rayakan hari ini,<br><br>yang paling ingin aku
+            rayakan adalah keberadaanmu.<br><br>Karena dunia mungkin melihatmu sebagai seseorang yang kuat.<br><br>Tapi
+            aku melihatmu sebagai seseorang yang tetap berjalan bahkan ketika lelah.<br><br>Seseorang yang tetap
+            tersenyum meski sedang memikul banyak hal.<br><br>Dan seseorang yang, tanpa sadar, berhasil menjadi salah
+            satu bagian paling berharga dalam hariku.</p>
+          <div class="scroll-indicator reveal">
+            <span>scroll</span>
+            <div class="scroll-line"></div>
+          </div>
+        </section>
+
+        <div class="divider reveal"><span class="divider-icon">✦</span></div>
+
+        <section class="section">
+          <div class="reveal">
+            <span class="eyebrow">the little things, the big things</span>
+            <h2 class="section-title">Things I Appreciate<br>About You</h2>
+          </div>
+          <div class="grid-container">
+            <div class="card reveal">
+              <span class="card-icon">🤍</span>
+              <div class="card-title">The Way You Keep Going</div>
+              <div class="card-desc">
+                Aku kagum pada caramu bertahan.
+
+                Bukan karena hidup selalu mudah untukmu.
+
+                Tapi karena meskipun tidak mudah, kamu tetap memilih untuk melangkah.
+
+                Setiap hari.
+
+                Lagi dan lagi.
+
+                Dan aku harap kamu tahu betapa luar biasanya itu</div>
+            </div>
+            <div class="card reveal">
+              <span class="card-icon">✨ </span>
+              <div class="card-title">The Gentle Heart You Hide</div>
+              <div class="card-desc">✨ The Gentle Heart You Hide
+
+                Kamu sering terlihat kuat.
+
+                Kadang terlalu kuat.
+
+                Sampai orang lupa bahwa di balik semua itu ada hati yang juga bisa lelah, sedih, dan ingin dimengerti.
+
+                Tapi justru itu yang membuatmu begitu istimewa bagiku.
+
+                Karena aku tahu seberapa besar hatimu bahkan ketika kamu tidak menunjukkannya.</div>
+            </div>
+            <div class="card reveal">
+              <span class="card-icon">🌻</span>
+              <div class="card-title">The Person You Are</div>
+              <div class="card-desc">Aku suka caramu berbicara.
+
+                Aku suka caramu peduli.
+
+                Aku suka caramu hadir.
+
+                Aku suka bagaimana kamu membuat percakapan sederhana terasa lebih berarti.
+
+                Dan aku suka fakta bahwa dari sekian banyak manusia di dunia ini, aku dipertemukan denganmu.</div>
+            </div>
+            <div class="card reveal">
+              <span class="card-icon">🍀</span>
+              <div class="card-title"> The Place You Have In My Heart</div>
+              <div class="card-desc">Mungkin kamu tidak sadar, tapi perlahan kamu menjadi salah satu bagian favorit
+                dalam hariku. Ketika orang lain terus berfokus pada sisi dewasa serta pencapaian mu, aku justru melihat
+                sesuatu yang lebih dari itu. Aku melihat seseorang yang tetap melangkah meski lelah, tetap tersenyum
+                meski menyimpan banyak luka, dan terus berusaha menjadi versi terbaik dari dirinya kemarin. Aku
+                bersyukur diperkenalkan dengan seseorang seindah kamu. Aku tidak menyesal membagikan tangki cintaku
+                padamu setiap hari. karena kamu memang pantas untuk dicintai, di peluk, dan diapresiasi setiap hari.
+                🤍</div>
+              </div>
+            </div>
+        </section>
+
+        <section class="section reveal">
+          <span class="eyebrow">your birthday ocean</span>
+          <h2 class="section-title">An Ocean Full of<br>Wishes For You</h2>
+          <div class="garden-box">
+            <div class="flowers-row">
+              <div class="flower-item" data-msg="🐬 — You Might be The Light."><img src="foto1.png" alt=""></div>
+              <div class="flower-item" data-msg="🐠 — I am Proud of You."><img src="foto2.png" alt=""></div>
+              <div class="flower-item" data-msg="🐢 — DO not Change, Just be Better."><img src="foto3.png" alt=""></div>
+              <div class="flower-item" data-msg="🐙 — Having a Perfect Life."><img src="foto4.png" alt=""></div>
+              <div class="flower-item" data-msg="🐳 — I Hope Life Treats You Well."><img src="foto5.png" alt=""></div>
+            </div>
+            <p id="garden-message">✦ tap a sea creature to reveal its secret message ✦</p>
+          </div>
+        </section>
+
+        <section class="section reveal">
+          <span class="eyebrow">a little soundtrack for you</span>
+          <h2 class="section-title">Top 3 Lagu<br>Untukmu</h2>
+          <div class="playlist-box">
+            <div class="playlist-head">
+              <div class="playlist-cover">🎧</div>
+              <div class="playlist-meta">
+                <div class="pl-label">playlist</div>
+                <div class="pl-name">For Maverick</div>
+                <div class="pl-sub">3 lagu · diputar dengan sepenuh hati</div>
+              </div>
+            </div>
+            <div class="track-list" id="trackList"></div>
+          </div>
+        </section>
+
+        <section class="section reveal">
+          <span class="eyebrow">our story, written</span>
+          <h2 class="section-title">A Letter For You</h2>
+          <div class="letter-display-box">
+            <p class="letter-paragraph">Selamat bertambah usia, Maverick Aldrich.</p>
+            <p class="letter-paragraph">Kamu telah menjalani satu tahun yang luar biasa hebat. Hari ini, tepatnya
+              tanggal 22 Juni, aku ingin menjadi salah satu orang yang merayakan kelahiranmu. Sama seperti mentari yang
+              tersenyum indah saat tawa pertamamu bergema. Sama seperti kicauan burung gereja di dahan pohon cemara yang
+              terharu mendengar tangismu. Seperti lonceng yang berdenting keras menyambut kelahiran umat baru. Aku ingin
+              menjadi salah satu lampion penuh harapan di langit seperti milik orang-orang terkasihmu.</p>
+            <p class="letter-paragraph">Di usiamu yang menginjak usia matang, aku berharap kamu masih ingat untuk
+              sesekali beristirahat. Beristirahat dari dunia yang berisik, dari rumah yang keras, dan dari pekerjaanmu.
+              Sesekali, peluk dan sayangilah dirimu. Kamu tumbuh terlalu kuat melebihi kebanyakan manusia, hingga tanpa
+              sadar terpatah-patah tulangmu berusaha membuat segalanya terlihat baik-baik saja. Kamu adalah manusia
+              biasa Maverick. Kamu berhak gagal, berhak kecewa, berhak lelah, dan kamu berhak beristirahat.</p>
+            <p class="letter-paragraph">Dalam lembaran baru hidupmu, aku berharap jalanmu yang terjal mulai ditumbuhi
+              bunga. Aku berharap keberuntungan dan kebahagiaan selalu merengkuh erat ragamu, bahkan ketika kamu jatuh
+              terperosok ke dalam lubang hitam yang tak terjamah sinar mentari. Semoga senyummu tulus, bukan sekadar
+              formalitas, namun muncul di saat dunia terasa ringan. Semoga tawamu terdengar lebih riang dan lepas.
+              Semoga hari-hari berat segera berlalu dan berganti dengan kebahagiaan tanpa batas.</p>
+            <p class="letter-paragraph">Terima kasih banyak, Maverick Aldrich, atas kelahiranmu di tanah Ibu Pertiwi.
+              Terima kasih banyak atas ketegaranmu hingga saat ini. Terima kasih banyak karena terus bangkit dari patah
+              hati yang tak terkatakan. Tolong tetaplah hidup bahkan ketika kamu tidak punya alasan untuk tetap
+              melangkah. Tolong tetaplah hidup bahkan ketika kamu merasa muak menjadi manusia. Tolong tetaplah hidup
+              sampai Tuhan berkata "Sudah cukup".</p>
+            <p class="letter-paragraph">Jika kamu lelah, gagal, atau kecewa, jangan malu untuk menangis, jangan takut
+              untuk bercerita pada orang yang Anda percaya, dan jangan ragu untuk meminta bantuan dari orang yang kamu
+              kasihi. Mohon maaf atas hadiah ku yang mungkin tidak seberapa ini. Mohon maaf atas sifat kekanak-kanakanku
+              yang telah menyulitkan harimu.</p>
+            <p class="letter-paragraph">-Dari Zye, penghuni pohon mangga.</p>
+
+          </div>
+        </section>
+
+        <section class="section reveal">
+          <div class="closing-letter">
+            <h2 class="closing-title">You Are<br>More Loved Than You Realize</h2>
+            <p class="closing-body">
+              You Are More Loved Than You Realize
+
+              Mungkin kamu tidak selalu melihatnya.
+
+              Mungkin kamu terlalu sibuk menjaga orang lain sampai lupa melihat dirimu sendiri.
+
+              Tapi ada orang-orang yang bahagia karena kamu ada.
+
+              Ada orang-orang yang tersenyum ketika namamu muncul di layar mereka.
+
+              Ada orang-orang yang diam-diam bersyukur karena dipertemukan denganmu.
+
+              Aku salah satunya.
+
+              Selamat ulang tahun, Mav.
+
+              Terima kasih sudah bertahan sejauh ini.
+
+              Dan terima kasih karena, tanpa sadar, kamu sudah menjadi salah satu bagian paling hangat dari hari-hariku.
+              🤍
+            </p>
+            <div class="closing-sig">— Made with love, just for you 🤍</div>
+            <div class="closing-stars">✦ ✦ ✦</div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="site-footer">made with love, just for you</footer>
+    </div>
+
+  </div><!-- /#ocean-page -->
+
+  <audio id="bgm" loop preload="auto">
+    <source src="song2.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
